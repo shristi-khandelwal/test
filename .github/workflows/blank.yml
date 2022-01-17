@@ -40,7 +40,7 @@ jobs:
       - name: Run when triggered
         run: |
           #if [startsWith("${{ github.ref }}", 'refs/heads/develop')]; then echo "This is sandbox environment"; elif [startsWith("${{ github.ref }}", 'refs/heads/release-')]; then echo "This is uat environment"; else echo "na"
-          echo "test";
+          echo ${{github.base_ref}};
           
       - name: variable-mapper
         uses: kanga333/variable-mapper@v0.2.2
