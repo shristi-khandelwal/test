@@ -30,17 +30,16 @@ jobs:
         run: echo ${{ github.ref }}
 
       # Runs a set of commands using the runners shell
-      - name: Run when triggered from release branch
-        if: startsWith(github.ref, 'refs/heads/release-')
-        run: |
-          echo This is uat environment,
-          echo ${{ github.ref }}
+      #- name: Run when triggered from release branch
+       # if: startsWith(github.ref, 'refs/heads/release-')
+        #run: |
+         # echo This is uat environment,
+          #echo ${{ github.ref }}
 
       # Runs a set of commands using the runners shell
-      - name: Run when triggered ffom develop
-        if: startsWith(github.ref, 'refs/heads/develop')
+      - name: Run when triggered
         run: |
-          echo This is sandbox environment,
+          if [startsWith(github.ref, 'refs/heads/develop')]; then echo "This is sandbox environment"; elif [startsWith(github.ref, 'refs/heads/release-')]; then echo "This is uat environment"; else echo "na"
           echo ${{ github.ref }}
           
       
