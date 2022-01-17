@@ -35,17 +35,22 @@ jobs:
         #run: |
          # echo This is uat environment,
           #echo ${{ github.ref }}
+          
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
 
       # Runs a set of commands using the runners shell
       - name: echo base_ref
         run: |
           echo ref ${{ github.ref }}
-          echo base_ref ${{ github.base_ref }}
+          echo extract_branch ${{ steps.extract_branch.outputs.branch }}
           
       - name: variable-mapper
         uses: kanga333/variable-mapper@v0.2.2
         with:
-          key: "${{github.base_ref}}"
+          key: "${{ steps.extract_branch.outputs.branch }}"
           map: |
             {
               "master": {
