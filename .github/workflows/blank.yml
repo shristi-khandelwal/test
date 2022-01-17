@@ -39,7 +39,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run when triggered
         run: |
-          if [startsWith( ${{ github.ref }}, 'refs/heads/develop')]; then echo "This is sandbox environment"; elif [startsWith( ${{ github.ref }}, 'refs/heads/release-')]; then echo "This is uat environment"; else echo "na"
+          if [startsWith("${{ github.ref }}", 'refs/heads/develop')]; then echo "This is sandbox environment"; elif [startsWith("${{ github.ref }}", 'refs/heads/release-')]; then echo "This is uat environment"; else echo "na"
           echo ${{ github.ref }}
           
       
