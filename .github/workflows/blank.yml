@@ -71,3 +71,6 @@ jobs:
         with:
           command: yq e '(.server.additionalApplications[]|select(.name == "reactjs-app").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' -i ${{ env.values_file }}
 
+      - name: Print yaml
+        run: |
+          cat ${{ env.values_file }}
