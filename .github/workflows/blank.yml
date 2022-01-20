@@ -14,6 +14,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+      - name: Generate build ID
+        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        id: prep
+        run: |
+          sha=${GITHUB_SHA::7}vc
+          ts=$(date +'%d-%m-%Y')
+          echo "::set-output name=BUILD_ID::${sha}-${ts}"
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
           
@@ -21,6 +30,14 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+      
+      - name: Branch Names
+        # You may pin to the exact commit or the version.
+        # uses: tj-actions/branch-names@b99758d88d96a27ee98b444451c1602a4507d243
+        uses: tj-actions/branch-names@v5.1
+        
+      - name: print output
+        run: ${{ steps.branch-name.outputs }}
       
       - name: variable-mapper
         if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
