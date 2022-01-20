@@ -24,13 +24,50 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Print github ref
-        run: echo ${{ github.ref }}!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      
+      - name: Setup YQ
+        uses: chrisdickinson/setup-yq@latest
+        
+      - name: Check if yq installed
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          pwd
+          ls -al
+          
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      
+      - name: variable-mapper
+        uses: kanga333/variable-mapper@v0.2.2
+        with:
+          key: "${{ steps.extract_branch.outputs.branch }}"
+          map: |
+            {
+              "master": {
+                "environment": "production",
+                "values_file": "values-master.yaml"
+              },
+              "development": {
+                "environment": "development",
+                "values_file": "values-sandbox.yaml"
+              },
+              "release": {
+                "environment": "uat",
+                "values_file": "test.yaml"
+              }
+            }
+          export_to: env,log,output
+          
+      - name: Echo environment and output
+        run: |
+          echo ${{ env.environment }}
+          echo values_file ${{ env.values_file }}      
+          
+      - name: YQ by mikefarah as github action
+      # You may pin to the exact commit or the version.
+      # uses: tomasdedic/yq-action@aab1899c3474e237113515eebf86c11d6d3670df
+        uses: tomasdedic/yq-action@1.4
+        with:
+          command: yq e '(.people[]|select(.name == "Srishti").age)|=10' ${{ env.values_file }}
+
