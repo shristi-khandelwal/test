@@ -4,7 +4,7 @@ server:
       project: default
       source:
         repoURL: "https://github.com/XSIGHTME/react-xstate-front-base.git"
-        targetRevision: test-test-test-test-test-test-test-test-test-test-test-test-test-test-test-release-1.3
+        targetRevision: test-test-test-test-test-test-test-test-test-test-test-test-test-test-test-test-release-1.3
         path: charts/app
         helm:
           valueFiles:
