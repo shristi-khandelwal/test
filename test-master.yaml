@@ -1,0 +1,20 @@
+server:
+  additionalApplications:
+    - name: test
+      project: default
+      source:
+        repoURL: "https://github.com/shristi-khandelwal/test.git"
+        targetRevision: develop
+        path: charts/app
+        helm:
+          valueFiles:
+            - values-master.yml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: xsight
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: false
+          selfHeal: false
