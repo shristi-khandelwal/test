@@ -80,6 +80,7 @@ jobs:
         with:
           # What version of YQ to install
           yq-version: 2.13.0
+          yq-url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           
       - name: YQ by mikefarah as github action
       # You may pin to the exact commit or the version.
