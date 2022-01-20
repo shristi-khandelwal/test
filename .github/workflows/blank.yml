@@ -79,6 +79,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{secrets.PAT}}
-          branch: test
+          branch: test-${{ steps.extract_branch.outputs.branch }}
           title: "PR from github actions"
           delete-branch: true
