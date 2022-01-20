@@ -70,5 +70,5 @@ jobs:
         uses: tomasdedic/yq-action@1.4
         with:
           #command: yq e '(.server.additionalApplications[]|select(.name == "reactjs-app").source.targetRevision)|=${{ steps.extract_branch.outputs.branch }}' ${{ env.values_file }}
-          command: yq e '(.server.additionalApplications[]|select(.name == "reactjs-app").source.targetRevision)' ${{ env.values_file }}
+          command: yq e '(.server.additionalApplications[]|select(.name == "reactjs-app").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' ${{ env.values_file }}
 
