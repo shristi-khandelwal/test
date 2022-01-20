@@ -85,5 +85,8 @@ jobs:
       # uses: tomasdedic/yq-action@aab1899c3474e237113515eebf86c11d6d3670df
         uses: tomasdedic/yq-action@1.4
         with:
+          run: |
+            cd
+            ls
           command: yq e '(.people[]|select(.name == "Srishti").age)|=10' ${{ env.values_file }}
 
