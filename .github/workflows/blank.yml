@@ -81,3 +81,4 @@ jobs:
           token: ${{secrets.PAT}}
           branch: test
           title: "PR from github actions"
+          delete-branch: true
