@@ -1,14 +1,14 @@
 server:
   additionalApplications:
-    - name: reactjs-app
+    - name: test
       project: default
       source:
-        repoURL: "https://github.com/XSIGHTME/react-xstate-front-base.git"
+        repoURL: "https://github.com/shristi-khandelwal/test.git"
         targetRevision: develop
         path: charts/app
         helm:
           valueFiles:
-            - sandbox-values.yml
+            - test.yml
       destination:
         server: https://kubernetes.default.svc
         namespace: xsight
