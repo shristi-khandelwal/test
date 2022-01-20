@@ -1,5 +1,20 @@
-people:
-  - name: Srishti
-    age: 24
-  - name: Test
-    age: 80
+server:
+  additionalApplications:
+    - name: reactjs-app
+      project: default
+      source:
+        repoURL: "https://github.com/XSIGHTME/react-xstate-front-base.git"
+        targetRevision: develop
+        path: charts/app
+        helm:
+          valueFiles:
+            - sandbox-values.yml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: xsight
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: false
+          selfHeal: false
