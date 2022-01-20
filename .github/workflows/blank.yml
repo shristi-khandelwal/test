@@ -15,8 +15,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+        
       - name: Generate build ID
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         id: prep
         run: |
           sha=${GITHUB_SHA::7}vc
@@ -25,22 +30,22 @@ jobs:
           
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
           
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      
       
       - name: Branch Names
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         # You may pin to the exact commit or the version.
         # uses: tj-actions/branch-names@b99758d88d96a27ee98b444451c1602a4507d243
         uses: tj-actions/branch-names@v5.1
         
       - name: print output
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         run: echo is_tag ${{ steps.branch-name.outputs.is_tag }}
       
       - name: variable-mapper
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         uses: kanga333/variable-mapper@v0.2.2
         with:
           key: "${{ steps.extract_branch.outputs.branch }}"
@@ -62,7 +67,7 @@ jobs:
           export_to: env,log,output
           
       - name: Echo environment and output
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         run: |
           echo ${{ env.environment }}
           echo values_file ${{ env.values_file }} 
@@ -70,17 +75,17 @@ jobs:
           
             
       - name: Setup YQ
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         uses: chrisdickinson/setup-yq@latest
         
       - name: Check if yq installed
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         run: |
           pwd
           ls -al
           
       - name: YQ by mikefarah as github action
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
       # You may pin to the exact commit or the version.
       # uses: tomasdedic/yq-action@aab1899c3474e237113515eebf86c11d6d3670df
         uses: tomasdedic/yq-action@1.4
@@ -88,15 +93,15 @@ jobs:
           command: yq e '(.server.additionalApplications[]|select(.name == "reactjs-app").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' -i ${{ env.values_file }}
 
       - name: Print yaml
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         run: |
           cat ${{ env.values_file }}
 
       - name: Create Pull Request
-        if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
+        if: startsWith(${{ steps.extract_branch.outputs.branch }}, 'release-')
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{secrets.PAT}}
-          branch: test-${{ steps.extract_branch.outputs.branch }}
+          branch: image-tag-${{ steps.prep.outputs.BUILD_ID }}
           title: "PR from github actions"
           delete-branch: true
