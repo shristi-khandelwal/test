@@ -37,7 +37,7 @@ jobs:
         uses: tj-actions/branch-names@v5.1
         
       - name: print output
-        run: ${{ steps.branch-name.outputs }}
+        run: ${{ steps.branch-name.outputs.is_tag }}
       
       - name: variable-mapper
         if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
