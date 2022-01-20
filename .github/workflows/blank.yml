@@ -48,7 +48,8 @@ jobs:
         if: startsWith('${{ steps.extract_branch.outputs.branch }}', 'release-')
         run: |
           echo ${{ env.environment }}
-          echo values_file ${{ env.values_file }}      
+          echo values_file ${{ env.values_file }} 
+          echo repo-name ${{ github.event.repository.name }}
           
             
       - name: Setup YQ
