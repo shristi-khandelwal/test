@@ -63,18 +63,28 @@ jobs:
           pwd
           ls -al
           
+      - name: Print yaml
+        if: startsWith(github.ref, 'refs/heads/release-')
+        run: |
+          cat ${{ env.values_file }}
+          cat test-master.yaml
+          
       - name: YQ by mikefarah as github action
         if: startsWith(github.ref, 'refs/heads/release-')
       # You may pin to the exact commit or the version.
       # uses: tomasdedic/yq-action@aab1899c3474e237113515eebf86c11d6d3670df
         uses: tomasdedic/yq-action@1.4
         with:
-          command: yq e '(.server.additionalApplications[]|select(.name == "${{ github.event.repository.name }}").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' -i ${{ env.values_file }} "test-master.yaml"
+          command: |
+            yq e '(.server.additionalApplications[]|select(.name == "${{ github.event.repository.name }}").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' -i ${{ env.values_file }}
+            yq e '(.server.additionalApplications[]|select(.name == "${{ github.event.repository.name }}").source.targetRevision) |= "${{ steps.extract_branch.outputs.branch }}"' -i test-master.yaml
 
       - name: Print yaml
         if: startsWith(github.ref, 'refs/heads/release-')
         run: |
           cat ${{ env.values_file }}
+          cat test-master.yaml
+          
       - name: Create Pull Request
         if: startsWith(github.ref, 'refs/heads/release-')
         uses: peter-evans/create-pull-request@v3
