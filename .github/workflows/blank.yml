@@ -73,14 +73,12 @@ jobs:
           echo ${{ env.environment }}
           echo values_file ${{ env.values_file }}
           
-      - name: setup-yq
-        # You may pin to the exact commit or the version.
-        # uses: chrisdickinson/setup-yq@69aa9efdf7a9240129b103a65373c05cbc375679
-        uses: chrisdickinson/setup-yq@v1.0.0
-        with:
-          # What version of YQ to install
-          yq-version: 2.13.0
-          yq-url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+      - name: Setup YQ
+        uses: chrisdickinson/setup-yq@latest
+        
+      - name: Check if yq installed
+        run: |
+          yq --help
           
       - name: YQ by mikefarah as github action
       # You may pin to the exact commit or the version.
