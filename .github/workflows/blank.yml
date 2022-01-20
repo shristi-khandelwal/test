@@ -74,3 +74,10 @@ jobs:
       - name: Print yaml
         run: |
           cat ${{ env.values_file }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{secrets.PAT}}
+          branch: test
+          title: "PR from github actions"
