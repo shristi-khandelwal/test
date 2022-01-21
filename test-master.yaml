@@ -18,3 +18,22 @@ server:
         automated:
           prune: false
           selfHeal: false
+    - name: sample-app
+      project: default
+      source:
+        repoURL: "https://github.com/shristi-khandelwal/sample-app.git"
+        targetRevision: develop
+        path: charts/app
+        helm:
+          valueFiles:
+            - test.yml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: xsight
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: false
+          selfHeal: false
+
