@@ -45,13 +45,13 @@ jobs:
           
       - name: cd and cat
         run: |
-          cd test
+          cd test/sample
           cat sample.txt
           
       - name: cd and cat
         run: |
           pwd
-          cd test
+          cd test/sample
           cat sample.txt
           
             
