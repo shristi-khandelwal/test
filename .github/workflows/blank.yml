@@ -66,8 +66,15 @@ jobs:
       - name: Print yaml
         if: startsWith(github.ref, 'refs/heads/release-')
         run: |
-          cat ${{ env.values_file }}
-          cat test-master.yaml
+          cd test
+          cat test.txt
+          
+      - name: Print yaml
+        if: startsWith(github.ref, 'refs/heads/release-')
+        run: |
+          pwd
+          cd test
+          cat test.txt
           
       - name: YQ by mikefarah as github action
         if: startsWith(github.ref, 'refs/heads/release-')
