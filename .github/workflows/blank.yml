@@ -50,8 +50,6 @@ jobs:
           
       - name: cd and cat
         run: |
-          pwd
-          cd test/sample
           cat sample.txt
           
             
