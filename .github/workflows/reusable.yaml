@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+
+jobs:
+  pre-commit:
+    name: pre-commit
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+
+  npm-and-sonarqube:
+    name: npm-and-sonarqube-test
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    
