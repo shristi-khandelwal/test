@@ -10,8 +10,6 @@ jobs:
   # This workflow contains a single job called "build"
   test:
     uses: ./.github/workflows/reusable.yaml
-    with:
-      token: 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
     
   build:
     # The type of runner that the job will run on
