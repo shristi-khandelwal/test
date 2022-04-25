@@ -2,14 +2,23 @@ on:
   workflow_call:
 
 jobs:
-  pre-commit:
+  check-changes:
     name: pre-commit
+    outputs:
+      go:  ${{ steps.changes.outputs.go }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          go:
+            - '.github/**'
 
   npm-and-sonarqube:
     name: npm-and-sonarqube-test
+    needs: check-changes
+    if: ${{ needs. check-changes.outputs.go == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
