@@ -9,7 +9,7 @@ on: push
 jobs:
   # This workflow contains a single job called "build"
   test:
-    uses: XSIGHTME/xsight-infra-pipelines/.github/workflows/pr-checks-nodejs.yml@develop
+    uses: ./.github/workflows/reusable.yaml
     with:
       token: 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
     
