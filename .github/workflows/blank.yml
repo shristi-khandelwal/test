@@ -10,6 +10,8 @@ jobs:
   # This workflow contains a single job called "build"
   test:
     uses: XSIGHTME/xsight-infra-pipelines/.github/workflows/pr-checks-nodejs.yml@develop
+    with:
+      token: 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
     
   build:
     # The type of runner that the job will run on
