@@ -4,13 +4,13 @@ on:
 jobs:
   pre-commit:
     name: pre-commit
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
   npm-and-sonarqube:
     name: npm-and-sonarqube-test
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     
