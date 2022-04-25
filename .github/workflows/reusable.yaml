@@ -3,7 +3,7 @@ on:
 
 jobs:
   check-changes:
-    name: pre-commit
+    name: check-changes
     outputs:
       go:  ${{ steps.changes.outputs.go }}
     runs-on: ubuntu-latest
