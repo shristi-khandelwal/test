@@ -28,4 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Docker-compose
         run: |
-          git clone https://github.com/jgsqware/clairctl.git $GOPATH/src/github.com/jgsqware/clairctl
+          git clone https://github.com/jgsqware/clairctl.git 
+          cd src
+          ls
+          # $GOPATH/src/github.com/jgsqware/clairctl
