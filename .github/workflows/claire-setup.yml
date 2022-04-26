@@ -35,7 +35,8 @@ jobs:
           cd clairctl
           ls
           docker-compose up -d postgres
-          docker-compose exec clairctl clairctl health
         
-#       - name: check clairctl health
-#         run: docker-compose exec clairctl clairctl health
+      - name: check clairctl health
+        run: |
+          docker-compose exec clair netstat -anp
+          docker-compose exec clairctl clairctl health
