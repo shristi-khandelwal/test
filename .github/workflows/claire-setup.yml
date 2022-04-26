@@ -29,5 +29,6 @@ jobs:
       - name: Docker-compose
         run: |
           git clone https://github.com/jgsqware/clairctl.git 
+          cd $GOPATH
           ls
           # $GOPATH/src/github.com/jgsqware/clairctl
