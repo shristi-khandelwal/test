@@ -38,5 +38,4 @@ jobs:
         
       - name: check clairctl health
         run: |
-          docker-compose exec clair netstat -anp
-          docker-compose exec clairctl clairctl health
+          docker exec -it clairctl clairctl health
