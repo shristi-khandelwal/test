@@ -24,6 +24,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: Master branch version
         run: curl -L https://raw.githubusercontent.com/jgsqware/clairctl/master/install.sh | sh
+        
+      - name: Docker Compose Setup
+        uses: ndeloof/install-compose-action@v0.0.1
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
