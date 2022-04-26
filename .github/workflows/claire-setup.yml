@@ -38,4 +38,5 @@ jobs:
         
       - name: check clairctl health
         run: |
+          cd clairctl
           docker-compose exec clairctl clairctl health
