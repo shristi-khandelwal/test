@@ -21,53 +21,24 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
+      # Runs a single command using the runners shell
+      - name: Master branch version
+        run: curl -L https://raw.githubusercontent.com/jgsqware/clairctl/master/install.sh | sh
+        
       - name: Docker Compose Setup
         uses: ndeloof/install-compose-action@v0.0.1
-        
-      - name: Install Package
-        uses: ConorMacBride/install-package@v1.0.0
-        with:
-          brew: go
-          
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
-        shell: bash
         run: |
-          #ulimit -n 8096
-          #export COMPOSE_INTERACTIVE_NO_CLI=1
-          git clone https://github.com/arminc/clair-scanner.git 
-          cd clair-scanner
-          sudo apt-get update 
-          sudo apt-get install vim
-          make -i -k build
-          #make -i -k cross
-          make -i -k installLocal
-          #./clair-scanner -h
+          git clone https://github.com/jgsqware/clairctl.git 
+          cd clairctl
+          ls
+          docker-compose up -d postgres
           
-
-      - uses: robinraju/release-downloader@v1.3
-        with: 
-          repository: "arminc/clair-scanner"
-          tag: "v12"
-          fileName: "clair-scanner_linux_amd64"
-          tarBall: true
-          zipBall: true
-          out-file-path: clair-scanner
         
-      
-        
-      - name: Docker build and run
+      - name: check clairctl health
         run: |
-          docker run -p 5432:5432 -d --name db arminc/clair-db:latest
-          docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:latest
-          #clair-scanner -w example-alpine.yaml --ip YOUR_LOCAL_IP alpine:3.5
-
-        working-directory: clair-scanner
-
-
-      - name: Docker build, Clair scan, ACR push
-        uses: MaciejBoguta/docker-clair-acr-action@v0.2.0
-        with:
-          image-name: arminc/clair-local-scan
-        
+          cd clairctl
+          ls
+          docker-compose exec clairctl clairctl health
