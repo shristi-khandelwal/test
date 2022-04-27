@@ -29,8 +29,8 @@ jobs:
         run: |
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
-          apt-get update 
-          apt-get install vim
+          sudo apt-get update 
+          sudo apt-get install vim
           make build
           make cross
           make installLocal
