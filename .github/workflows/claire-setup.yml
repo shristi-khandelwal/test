@@ -29,10 +29,6 @@ jobs:
         with:
           brew: go
           
-      - name: Docker build, Clair scan, ACR push
-        uses: MaciejBoguta/docker-clair-acr-action@v0.2.0
-        with:
-          image-name: alpine
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
@@ -59,7 +55,13 @@ jobs:
           zipBall: true
           out-file-path: clair-scanner
         
-
+      
+      - name: Docker build, Clair scan, ACR push
+        uses: MaciejBoguta/docker-clair-acr-action@v0.2.0
+        with:
+          image-name: alpine
+        
+        
       - name: Docker build and run
         run: |
           docker run -p 5432:5432 -d --name db arminc/clair-db:latest
