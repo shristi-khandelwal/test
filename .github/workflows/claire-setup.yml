@@ -31,9 +31,9 @@ jobs:
           cd clair-scanner
           sudo apt-get update 
           sudo apt-get install vim
-          make -T build
-          make -T cross
-          make -T installLocal
+          make -i -k build
+          make i -k cross
+          make i -k installLocal
           #./clair-scanner -h
           
 
