@@ -34,6 +34,6 @@ jobs:
         
       - name: check clairctl health
         run: |
-          cd clair-scanner
-          ./clair-scanner -h
+          docker run -p 5432:5432 -d --name db arminc/clair-db:latest
+        working-directory: clair-scanner
 
