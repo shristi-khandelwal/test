@@ -33,15 +33,15 @@ jobs:
       - name: Docker-compose
         shell: bash
         run: |
-          ulimit -n 8096
-          export COMPOSE_INTERACTIVE_NO_CLI=1
+          #ulimit -n 8096
+          #export COMPOSE_INTERACTIVE_NO_CLI=1
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
           sudo apt-get update 
           sudo apt-get install vim
           make -i -k build
-          #make i -k cross
-          make i -k installLocal
+          #make -i -k cross
+          make -i -k installLocal
           #./clair-scanner -h
           
 
