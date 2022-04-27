@@ -32,7 +32,7 @@ jobs:
           make build
           make cross
           make installLocal
-          ./clair-scanner -h
+          #./clair-scanner -h
           
 
       - uses: robinraju/release-downloader@v1.3
