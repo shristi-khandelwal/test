@@ -23,11 +23,17 @@ jobs:
 
       - name: Docker Compose Setup
         uses: ndeloof/install-compose-action@v0.0.1
+        
+      - name: Install Package
+        uses: ConorMacBride/install-package@v1.0.0
+        with:
+          brew: go
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
         shell: bash
         run: |
+          #ulimit -n 8096
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
           sudo apt-get update 
