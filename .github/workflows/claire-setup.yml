@@ -34,5 +34,6 @@ jobs:
         
       - name: check clairctl health
         run: |
-          cd clairctl
+          cd clair-scanner
+          ./clair-scanner -h
 
