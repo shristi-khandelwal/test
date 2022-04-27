@@ -32,8 +32,9 @@ jobs:
           make build
           make installLocal
         
-      - name: check clairctl health
+      - name: Docker build and run
         run: |
           docker run -p 5432:5432 -d --name db arminc/clair-db:latest
+          docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:latest
         working-directory: clair-scanner
 
