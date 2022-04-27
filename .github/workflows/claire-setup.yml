@@ -40,7 +40,7 @@ jobs:
           sudo apt-get update 
           sudo apt-get install vim
           make -i -k build
-          make i -k cross
+          #make i -k cross
           make i -k installLocal
           #./clair-scanner -h
           
