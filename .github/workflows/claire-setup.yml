@@ -56,17 +56,18 @@ jobs:
           out-file-path: clair-scanner
         
       
-      - name: Docker build, Clair scan, ACR push
-        uses: MaciejBoguta/docker-clair-acr-action@v0.2.0
-        with:
-          image-name: alpine
-        
         
       - name: Docker build and run
         run: |
           docker run -p 5432:5432 -d --name db arminc/clair-db:latest
           docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:latest
-          clair-scanner -w example-alpine.yaml --ip YOUR_LOCAL_IP alpine:3.5
+          #clair-scanner -w example-alpine.yaml --ip YOUR_LOCAL_IP alpine:3.5
 
         working-directory: clair-scanner
 
+
+      - name: Docker build, Clair scan, ACR push
+        uses: MaciejBoguta/docker-clair-acr-action@v0.2.0
+        with:
+          image-name: arminc/clair-local-scan
+        
