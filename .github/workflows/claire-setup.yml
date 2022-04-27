@@ -38,7 +38,6 @@ jobs:
       - uses: robinraju/release-downloader@v1.3
         with: 
           repository: "arminc/clair-scanner"
-          latest: true
           tag: "v12"
           fileName: "clair-scanner_linux_amd64"
           tarBall: true
