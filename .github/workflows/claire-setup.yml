@@ -26,6 +26,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
+        shell: bash
         run: |
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
