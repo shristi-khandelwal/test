@@ -21,22 +21,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-      # Runs a single command using the runners shell
-      - name: Master branch version
-        run: curl -L https://raw.githubusercontent.com/jgsqware/clairctl/master/install.sh | sh
-        
       - name: Docker Compose Setup
         uses: ndeloof/install-compose-action@v0.0.1
 
       # Runs a set of commands using the runners shell
       - name: Docker-compose
         run: |
-          git clone https://github.com/jgsqware/clairctl.git 
-          cd clairctl
-          ls
-          docker-compose up -d postgres
+          git clone https://github.com/arminc/clair-scanner.git 
+          cd clair-scanner
+          make build
+          make installLocal
         
       - name: check clairctl health
         run: |
           cd clairctl
-          docker-compose exec clairctl clairctl health
+
