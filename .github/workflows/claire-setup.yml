@@ -29,10 +29,10 @@ jobs:
         run: |
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
-          make ensure && make build
-          # make cross
+          make build
+          make cross
           make installLocal
-          # ./clair-scanner -h
+          ./clair-scanner -h
           
 
       - uses: robinraju/release-downloader@v1.3
@@ -42,6 +42,7 @@ jobs:
           fileName: "clair-scanner_linux_amd64"
           tarBall: true
           zipBall: true
+          out-file-path: clair-scanner
         
 
       - name: Docker build and run
