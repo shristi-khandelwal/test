@@ -30,9 +30,10 @@ jobs:
           git clone https://github.com/arminc/clair-scanner.git 
           cd clair-scanner
           make ensure && make build
-          make cross
+          #make cross
           make installLocal
-        
+          ./clair-scanner -h
+          
       - name: Docker build and run
         run: |
           docker run -p 5432:5432 -d --name db arminc/clair-db:latest
