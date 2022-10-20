@@ -1,0 +1,10 @@
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+  build:
+    steps:
+      - uses: actions/checkout@v2
