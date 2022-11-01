@@ -51,6 +51,6 @@ jobs:
         with:
           repo-token: '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'
 
-      - run: echo ${{ toJSON(fromJSON(steps.vars.outputs.pr)) }}
-        #if: steps.PR.outcome == 'success'
+      - run: echo ${{ steps.vars.outputs.pr_title }}
+      - run: echo ${{ steps.vars.outputs.pr_url }}
         
