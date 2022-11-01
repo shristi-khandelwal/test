@@ -51,5 +51,4 @@ jobs:
         uses: Brymastr/pr-info-action@v1
         
       - name: Print outputs
-        run: |
-          echo "Output - ${{ fromJson(steps.chart.outputs) }}"
+        run: echo "Output - ${{ fromJson(steps.chart.outputs) }}"
