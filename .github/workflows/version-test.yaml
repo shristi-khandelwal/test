@@ -41,8 +41,10 @@ jobs:
           echo "Version - ${{ steps.chart.outputs.version }}"
           echo "App Version - ${{ steps.chart.outputs.appVersion }}"
           
-      - name: PRs changes with matrix as output
-        uses: CrusaderX/changes@v1
+      - name: Pr Includes File Change
+        uses: Foodee/pr-includes-file-change@1.0.0
         with:
-          token: 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
-          folder: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
+          paths: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml
+          
+      - name: Get PR Info Action
+        uses: Brymastr/pr-info-action@v1
