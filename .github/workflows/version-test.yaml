@@ -47,4 +47,9 @@ jobs:
           paths: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml
           
       - name: Get PR Info Action
+        id: pr_info
         uses: Brymastr/pr-info-action@v1
+        
+      - name: Print outputs
+        run: |
+          echo "Output -\n ${{ steps.chart.outputs }} | jq '.' "
