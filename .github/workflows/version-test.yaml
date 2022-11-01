@@ -41,5 +41,7 @@ jobs:
           echo "Version - ${{ steps.chart.outputs.version }}"
           echo "App Version - ${{ steps.chart.outputs.appVersion }}"
           
-      - name: PR Details
-        uses: ramonsnir/gh-action-pr-details@1.0.3
+      - name: PRs changes with matrix as output
+        uses: CrusaderX/changes@v1
+        with:
+          folder: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
