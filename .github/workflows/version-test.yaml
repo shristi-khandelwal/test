@@ -52,6 +52,7 @@ jobs:
       - run: echo "PR ${prNumber} ${prTitle} at ${prUrl} is ${prJSON}"
         if: steps.PR.outcome == 'success'
         env:
+          github-token: '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'
           # JSON object with the full PR object
           # toJSON(fromJSON(...pr)) parses it into memory and then format is with pretty-print.
           prJSON: ${{ toJSON(fromJSON(steps.current_pr.outputs.pr)) }}
