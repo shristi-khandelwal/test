@@ -52,4 +52,4 @@ jobs:
         
       - name: Print outputs
         run: |
-          echo "Output -\n ${{ steps.chart.outputs | jq '.' }}"
+          echo "Output - ${{ fromJson(steps.chart.outputs) }}"
