@@ -40,3 +40,6 @@ jobs:
           echo "Name - ${{ steps.chart.outputs.name }}"
           echo "Version - ${{ steps.chart.outputs.version }}"
           echo "App Version - ${{ steps.chart.outputs.appVersion }}"
+          
+      - name: PR Details
+        uses: ramonsnir/gh-action-pr-details@1.0.3
