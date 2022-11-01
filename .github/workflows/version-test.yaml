@@ -44,5 +44,5 @@ jobs:
       - name: PRs changes with matrix as output
         uses: CrusaderX/changes@v1
         with:
-          token: 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
+          token: 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
           folder: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
