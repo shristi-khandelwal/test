@@ -54,5 +54,5 @@ jobs:
       - uses: 8BitJonny/gh-get-current-pr@2.1.3
         id: PR
 
-      - run: git diff 
-        name: git diff main...shristi-khandelwal-patch-1
+      - run: git show 
+        name: git show
