@@ -55,4 +55,4 @@ jobs:
         id: PR
 
       - run: git show 
-        name: git show
+        name: git show | grep version
