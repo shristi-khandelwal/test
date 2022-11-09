@@ -55,4 +55,4 @@ jobs:
         id: PR
 
       - run: git diff 
-        name: git diff charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml
+        name: git diff shristi-khandelwal-patch-1 develop 
