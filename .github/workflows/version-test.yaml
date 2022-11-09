@@ -54,4 +54,5 @@ jobs:
           command: |
             cd charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
             ls
-            yq e '(.version) |= "Chart.yaml"' -i Chart.yaml
+            yq e '(.version) -i Chart.yaml
+            cat Chart.yaml
