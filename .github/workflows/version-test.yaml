@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: shristi-khandelwal-patch-1
+          ref: ${{github.ref}}
       
       - id: files
         uses: jitterbit/get-changed-files@v1
@@ -54,4 +54,4 @@ jobs:
           command: |
             cd charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
             ls
-            yq e '(.version) |= "charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml"' -i charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml
+            yq e '(.version) |= "Chart.yaml"' -i Chart.yaml
