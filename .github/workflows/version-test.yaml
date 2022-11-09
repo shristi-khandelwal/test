@@ -55,4 +55,4 @@ jobs:
         id: PR
 
       - run: git diff 
-        name: git diff shristi-khandelwal-patch-1 develop 
+        name: git diff shristi-khandelwal-patch-1...develop 
