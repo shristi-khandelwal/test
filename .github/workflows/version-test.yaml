@@ -54,15 +54,5 @@ jobs:
       - uses: 8BitJonny/gh-get-current-pr@2.1.3
         id: PR
 
-      - run: echo "PR ${{ steps.PR.outputs.number }} - ${{ steps.PR.outputs.pr_title }} at ${{ steps.PR.outputs.pr_url }}"
-        if: steps.PR.outcome == 'success'
-        env:
-          # Direct access to common PR properties
-          prNumber: ${{ steps.PR.outputs.number }}
-          prUrl: ${{ steps.PR.outputs.pr_url }}
-          prTitle: ${{ steps.PR.outputs.pr_title }}
-          prBody: ${{ steps.PR.outputs.pr_body }}
-          prCreatedAt: ${{ steps.PR.outputs.pr_created_at }}
-          prMergedAt: ${{ steps.PR.outputs.pr_merged_at }}
-          prClosedAt: ${{ steps.PR.outputs.pr_closed_at }}
-          prLabel: ${{ steps.PR.outputs.pr_labels }}
+      - run: git show 
+        name: git show
