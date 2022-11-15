@@ -56,3 +56,6 @@ jobs:
             ls
             yq e '(.version)' -i Chart.yaml
             cat Chart.yaml
+            
+            chart-ve=$(yq e '(.version)' Chart.yaml)
+            echo $chart-ve
