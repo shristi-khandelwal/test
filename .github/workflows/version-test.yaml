@@ -1,0 +1,61 @@
+name: "test"
+on:
+  pull_request:
+  workflow_dispatch:
+  
+jobs:
+  helm:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.ref}}
+      
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      
+      - name: Get chart name
+        id: chart_name
+        run: |
+          changed_charts=""
+          for i in ${{ steps.files.outputs.all }}; do
+            if echo $i|grep -q 'charts'; then
+              unique_chart=$(cut -d '/' -f 2,3 <<< $i)
+              if ! echo $changed_charts|grep -q $unique_chart; then
+                changed_charts+="$unique_chart";
+              fi
+            fi
+          done
+          echo $changed_charts
+          echo "::set-output name=CHANGED_CHART::$changed_charts"
+      
+      - name: Print changed_charts
+        run: |
+          echo "Files - ${{ steps.chart_name.outputs.CHANGED_CHART }}"
+      - name: Read Helm Chart
+        id: chart
+        uses: jacobtomlinson/gha-read-helm-chart@master
+        with:
+          path: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
+      - name: Print outputs
+        run: |
+          echo "Name - ${{ steps.chart.outputs.name }}"
+          echo "Version - ${{ steps.chart.outputs.version }}"
+          echo "App Version - ${{ steps.chart.outputs.appVersion }}"
+          
+      - name: Pr Includes File Change
+        uses: Foodee/pr-includes-file-change@1.0.0
+        with:
+          paths: charts/${{ steps.chart_name.outputs.CHANGED_CHART }}/Chart.yaml
+          
+      - name: Change targetRevision
+        uses: tomasdedic/yq-action@1.4
+        with:
+          command: |
+            cd charts/${{ steps.chart_name.outputs.CHANGED_CHART }}
+            ls
+            yq e '(.version)' -i Chart.yaml
+            cat Chart.yaml
+            
+            chart=$(yq e '(.version)' Chart.yaml)
+            echo $chart
