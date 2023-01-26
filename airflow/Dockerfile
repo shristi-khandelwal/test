@@ -23,7 +23,7 @@ RUN pip3 install --no-cache-dir --user -r required_packages.txt
 
 RUN ls /home/airflow/.local/lib/python3.6/site-packages -ltr
 
-RUN zip $sha.zip /home/airflow/.local/lib/python3.6/site-packages && ls -al
+RUN zip "$sha".zip /home/airflow/.local/lib/python3.6/site-packages && ls -al
 
 USER root
 
