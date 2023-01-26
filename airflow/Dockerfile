@@ -4,6 +4,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
+ARG sha=${sha1sum required_packages.txt}
+
+RUN echo $sha
+
 RUN apt-get update -y && apt-get install -y unzip zip awscli
 
 USER airflow
@@ -11,9 +15,6 @@ USER airflow
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
-ARG sha=sha1sum required_packages.txt
-
-RUN echo $sha
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
