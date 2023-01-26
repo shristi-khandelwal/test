@@ -16,9 +16,9 @@ RUN sha1sum required_packages.txt
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
 
-RUN pip3 install --no-cache-dir --user -r required_packages.txt >> output.txt
+RUN pip3 install --no-cache-dir --user -r required_packages.txt
 
-RUN cat output.txt
+RUN ls /home/airflow/.local/lib/python3.6/site-packages -ltr
 
 USER root
 
