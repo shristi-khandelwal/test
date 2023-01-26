@@ -2,8 +2,6 @@ FROM apache/airflow:2.1.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG FILE_CHANGED
-
 USER root
 
 RUN apt-get update && apt-get install -y wget && apt-get install -y awscli && apt-get install -y unzip
