@@ -12,16 +12,14 @@ USER airflow
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
-ENV sha=${sha1sum required_packages.txt}
-
-RUN echo $sha
-
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
 
 RUN pip3 install --no-cache-dir --user -r required_packages.txt
 
 RUN ls /home/airflow/.local/lib/python3.6/site-packages -ltr
+
+RUN zip /home/airflow/.local/lib/python3.6/site-packages {sha1sum required_packages.txt}.zip && ls -al
 
 USER root
 
