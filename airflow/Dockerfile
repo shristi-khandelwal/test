@@ -4,29 +4,24 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-RUN apt-get update -y 
+RUN apt-get update -y && apt-get install -y unzip zip
 
 USER airflow
 
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
-#RUN echo "calculate digest"
 RUN sha1sum required_packages.txt
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
-
-
-#RUN echo "Installing Libraries"
-#RUN pip3 install --user -r required_packages.txt
-
-#RUN echo "Updated Cache"
-#RUN pip3 cache list
-#RUN ls /home/airflow/.cache/pip/wheels -ltr
+RUN pwd
+RUN pip3 install --user -r required_packages.txt >> output.txt
+RUN pwd && ls -ltr
+RUN cat output.txt
 
 USER root
 
-WORKDIR /opt    
+WORKDIR /opt
 
 RUN apt-get update
