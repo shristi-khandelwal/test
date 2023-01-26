@@ -12,7 +12,7 @@ USER airflow
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
-RUN sha1sum required_packages.txt >> output.txt
+RUN sha1sum required_packages.txt | awk '{print $1}' >> output.txt
 
 RUN sha=$(cat output.txt) && echo $sha
 
