@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-ARG sha=${sha1sum required_packages.txt}
+ENV sha=${sha1sum required_packages.txt}
 
 RUN echo $sha
 
