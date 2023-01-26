@@ -11,6 +11,7 @@ USER airflow
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
+RUN echo "calculate digest"
 RUN sha1sum required_packages.txt
 
 RUN echo "install your pip packages"
