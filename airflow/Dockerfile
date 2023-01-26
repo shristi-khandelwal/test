@@ -11,7 +11,9 @@ USER airflow
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
 
-RUN sha1sum required_packages.txt
+ARG sha=sha1sum required_packages.txt
+
+RUN echo $sha
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
