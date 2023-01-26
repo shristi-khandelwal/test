@@ -13,8 +13,11 @@ COPY required_packages.txt .
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN pip3 cache dir && pip3 cache info
+RUN echo "Existing Cache"
+RUN pip3 cache list
+RUN echo "Installing Libraries"
 RUN pip3 install --user -r required_packages.txt
+RUN echo "Updated Cache"
 RUN pip3 cache list
 
 USER root
