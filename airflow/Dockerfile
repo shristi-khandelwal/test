@@ -22,7 +22,7 @@ RUN pip3 install --user -r required_packages.txt
 
 RUN echo "Updated Cache"
 RUN pip3 cache list
-RUN ls /home/airflow/.cache/pip -ltr
+RUN ls /home/airflow/.cache/pip/wheels -ltr
 
 USER root
 
