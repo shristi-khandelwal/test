@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-RUN apt-get update && apt-get install -y r-cran-digest
+RUN apt-get update -y && apt-get install -y libdigest-sha-perl
 
 USER airflow
 
