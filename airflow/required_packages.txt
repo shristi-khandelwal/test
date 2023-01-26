@@ -1,3 +1,7 @@
 py4j==0.10.9
 pyspark==3.1.2
-#verticapy==0.6.0
+verticapy==0.6.0
+pandas==1.1.5
+awswrangler==2.10.0
+verticapy==0.6.0
+openpyxl==3.0.7
