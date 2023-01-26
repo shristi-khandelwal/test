@@ -4,14 +4,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-RUN apt-get update -y && apt-get install -y libdigest-sha-perl
-
-RUN digest -l
+RUN apt-get update -y 
 
 USER airflow
 
 RUN echo "Copy requirements file"
 COPY required_packages.txt .
+
+RUN sha1sum required_packages.txt
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
