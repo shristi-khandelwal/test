@@ -13,7 +13,7 @@ COPY required_packages.txt .
 
 RUN sha1sum required_packages.txt | awk '{print $1}' >> output.txt
 
-ENV sha="${cat output.txt}"
+ENV sha=`${cat output.txt}`
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
