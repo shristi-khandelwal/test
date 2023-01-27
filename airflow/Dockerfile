@@ -4,8 +4,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-ARG sha="test"
-
 RUN apt-get update -y && apt-get install -y unzip zip awscli
 
 USER airflow
@@ -15,8 +13,7 @@ COPY required_packages.txt .
 
 RUN sha1sum required_packages.txt | awk '{print $1}' >> output.txt
 
-ARG sha="$(cat output.txt)"
-RUN echo $sha
+ENV sha="${cat output.txt}"
 
 RUN echo "install your pip packages"
 RUN /usr/local/bin/python -m pip install --upgrade pip
