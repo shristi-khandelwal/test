@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
+ARG sha="test"
 
 RUN apt-get update -y && apt-get install -y unzip zip awscli
 
@@ -14,7 +15,7 @@ COPY required_packages.txt .
 
 RUN sha1sum required_packages.txt | awk '{print $1}' >> output.txt
 
-ENV sha=$(cat output.txt)
+ARG sha=$(cat output.txt)
 RUN echo $sha
 
 RUN echo "install your pip packages"
