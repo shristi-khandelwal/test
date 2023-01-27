@@ -15,7 +15,7 @@ COPY required_packages.txt .
 
 RUN sha1sum required_packages.txt | awk '{print $1}' >> output.txt
 
-ARG sha=$(cat output.txt)
+ARG sha="$(cat output.txt)"
 RUN echo $sha
 
 RUN echo "install your pip packages"
